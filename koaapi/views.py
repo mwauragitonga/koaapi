@@ -1,11 +1,18 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 from .models import Point
 from .serializers import PointSerializer
+
 import math
 
 class ClosestPointsView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         points_str = request.data.get('points')
         if not points_str:
@@ -31,6 +38,16 @@ class ClosestPointsView(APIView):
         serializer = PointSerializer(point)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def get (self, request):
+        points = Point.objects.all()
+        data = []
+        for point in points:
+            data.append({
+                'id': point.id,
+                'all_points': point.all_points,
+                'closest_points': point.closest_points,
+            })
+        return Response(data, status=status.HTTP_200_OK)
     def find_closest_points(self, points_list):
         closest_points = []
         min_distance = math.inf

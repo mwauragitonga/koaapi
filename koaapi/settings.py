@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,8 +38,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'koaapi'
+    'koaapi',
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+SECRET_KEY =  'AD4fedDFS567UGDSFDS'
+# settings.py
+
+# JWT Authentication Settings
+JWT_AUTH = {
+    'JWT_SECRET_KEY': 'AD4fedDFS567UGDSFDS',  # Replace with your actual secret key
+    'JWT_ALGORITHM': 'HS256',  # Choose the appropriate algorithm
+    'JWT_ALLOW_REFRESH': True,  # Set to True if you want to allow token refresh
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),  # Set the token expiration duration
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),  # Set the refresh token expiration duration
+}
+
+# Other Django settings...
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
