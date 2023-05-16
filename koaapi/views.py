@@ -21,8 +21,6 @@ class ClosestPointsView(APIView):
                 return Response({'error': f'Invalid point format: {point}'}, status=status.HTTP_400_BAD_REQUEST)
 
         closest_points = self.find_closest_points(points_list)
-        # Filter out empty values
-        # closest_points = [point for point in closest_points if point]
         # Create the Point object
         all_points = ';'.join(points)
         closest_points_str = ';'.join(closest_points)
@@ -64,8 +62,4 @@ class ClosestPointsView(APIView):
         closest_points = closest_points[::-1]
         # convert it to a string like 'x1,y1;x2,y2;x3,y3'
         closest_points = [f'{x},{y}' for x, y in closest_points]
-        
-        # Return the closest points as a semicolon-separated string
-        # closest_points = ';'.join(closest_points)
-
         return closest_points

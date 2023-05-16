@@ -8,27 +8,11 @@ from .serializers import PointSerializer
 class ClosestPointsAPITestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
-
-    # def test_closest_points_api_valid_input(self):
-    #     url = reverse('closest-points')
-    #     data = '2,2;-1,30;20,11;4,5'
-
-    #     response = self.client.post(url, {'points': data}, format='json')
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    #     expected_result = '2,2;4,5'
-    #     self.assertEqual(response.data['closest_points'], expected_result)
-
-    #     # Verify that the points are saved in the database
-    #     self.assertEqual(Point.objects.count(), 4)
     def test_closest_points_api_valid_input(self):
         url = reverse('closest-points')
         data = {'points': '2,2;-1,30;20,11;4,5'}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-        point = Point.objects.last()
-        serializer = PointSerializer(point)
         expected_data = {
                 'id': 1,
                 'all_points': '2,2;-1,30;20,11;4,5',
