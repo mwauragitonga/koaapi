@@ -1,7 +1,6 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.authentication import TokenAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import Point
@@ -50,20 +49,16 @@ class ClosestPointsView(APIView):
         return Response(data, status=status.HTTP_200_OK)
     def find_closest_points(self, points_list):
         closest_points = []
-        min_distance = math.inf
-
         # Iterate over each point in the list
         for i in range(len(points_list)):
             x1, y1 = points_list[i]
             closest_point = None
             closest_distance = math.inf
-
             # Compare the current point with all other points
             for j in range(len(points_list)):
                 if i != j:
                     x2, y2 = points_list[j]
                     distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-
                     # Update the closest point if a smaller distance is found
                     if distance < closest_distance:
                         closest_distance = distance
