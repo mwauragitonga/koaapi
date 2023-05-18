@@ -110,7 +110,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
-            'unix_socket': '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
+            'unix_socket': '/var/run/mysqld/mysqld.sock',
         },
     }
 }
