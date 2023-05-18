@@ -65,11 +65,25 @@ Setup Virtual Environment
 ```bash
   python -m venv /path/to/new/virtual/environment
 ```
+
+```bash
+  source venv_name/bin/activate
+```
+
 Install Dependencies to Virtual Environment
 
 ```bash
     pip install -r requirements.txt
 ```
+Run DB migrations
+
+```bash
+    python manage.py makemigrations
+```
+```bash
+   python manage.py migrate
+```
+
 Start the server
 
 ```bash
