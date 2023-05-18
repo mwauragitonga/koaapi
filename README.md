@@ -65,6 +65,11 @@ Setup Virtual Environment
 ```bash
   python -m venv /path/to/new/virtual/environment
 ```
+
+```bash
+  source venv_name/bin/activate
+```
+
 Install Dependencies to Virtual Environment
 
 ```bash
