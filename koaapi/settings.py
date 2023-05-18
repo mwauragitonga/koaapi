@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-d+kpvsa8+v9dd%101k%#7koqlc(nr22ygvd)(14!)hxrfd^l2n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'http://127.0.0.1:5500']
 
 
 # Application definition
@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'koaapi',
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'Auth.apps.AuthConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -49,20 +51,18 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
-SECRET_KEY =  'AD4fedDFS567UGDSFDS'
-# settings.py
+SECRET_KEY = 'django-insecure-94%)v=6+fi(rnsytlcj!^&zf4q*7*oq0k#2vyl#=vlw4nxxi-m'
 
 # JWT Authentication Settings
 JWT_AUTH = {
-    'JWT_SECRET_KEY': 'AD4fedDFS567UGDSFDS',  # Replace with your actual secret key
-    'JWT_ALGORITHM': 'HS256',  # Choose the appropriate algorithm
-    'JWT_ALLOW_REFRESH': True,  # Set to True if you want to allow token refresh
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),  # Set the token expiration duration
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),  # Set the refresh token expiration duration
+    'JWT_SECRET_KEY': 'AD4fedDFS567UGDSFDS', 
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_ALLOW_REFRESH': True, 
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7), 
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30),  
 }
 
 # Other Django settings...
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'koaapi.urls'
@@ -92,8 +93,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'koaapi.wsgi.application'
-
-
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5500',
+    
+]
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 

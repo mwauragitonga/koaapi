@@ -2,15 +2,44 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from .models import Point
 from .serializers import PointSerializer
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 import math
+
+@csrf_exempt
+class AjaxLoginView(View):
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # Login the authenticated user
+            login(request, user)
+            return JsonResponse({'message': 'Login successful'})
+        else:
+            return JsonResponse({'message': 'Invalid credentials'}, status=401)
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.method == 'POST':
+            return JsonResponse({'message': 'Invalid request method'}, status=400)
+        return super().dispatch(request, *args, **kwargs)
+
 
 class ClosestPointsView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+    
+    
     
     def post(self, request):
         points_str = request.data.get('points')
@@ -38,7 +67,7 @@ class ClosestPointsView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def get (self, request):
-        points = Point.objects.all()
+        points = Point.objects.all().order_by('-id')
         data = []
         for point in points:
             data.append({
