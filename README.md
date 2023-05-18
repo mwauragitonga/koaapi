@@ -78,7 +78,10 @@ Install Dependencies to Virtual Environment
 Run DB migrations
 
 ```bash
-    pip install -r requirements.txt
+    python manage.py makemigrations
+```
+```bash
+   python manage.py migrate
 ```
 
 Start the server
