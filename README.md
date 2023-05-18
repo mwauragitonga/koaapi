@@ -70,6 +70,12 @@ Install Dependencies to Virtual Environment
 ```bash
     pip install -r requirements.txt
 ```
+Run DB migrations
+
+```bash
+    pip install -r requirements.txt
+```
+
 Start the server
 
 ```bash
