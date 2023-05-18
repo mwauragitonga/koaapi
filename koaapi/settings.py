@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-d+kpvsa8+v9dd%101k%#7koqlc(nr22ygvd)(14!)hxrfd^l2n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://3.89.236.208', '3.89.236.208','127.0.0.1','localhost', 'http://127.0.0.1:5500']
+ALLOWED_HOSTS = ['127.0.0.1','localhost', 'http://127.0.0.1:5500']
 
 
 # Application definition
@@ -104,18 +104,16 @@ CORS_ALLOWED_ORIGINS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'koa',
+        'NAME': 'koa_live',
         'USER': 'root',
-        'PASSWORD': 'UrNKEeAnJtsM5M8FZTTk',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
-            'unix_socket': '/var/run/mysqld/mysqld.sock',
+            'unix_socket': '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
         },
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

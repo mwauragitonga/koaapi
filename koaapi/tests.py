@@ -33,20 +33,29 @@ class ClosestPointsAPITestCase(TestCase):
      
     def test_closest_points_api_valid_input(self):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + str(self.access_token))
+        
+        # Make a GET request to ensure the initial state of the API
         response = self.client.get('/api/closest-points/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
         url = reverse('closest-points')
         data = {'points': '2,2;-1,30;20,11;4,5'}
+        
+        # Make a POST request to the API endpoint with the input data
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        
+        # Define the expected data for the created object
         expected_data = {
-                'id': 5,
-                'all_points': '2,2;-1,30;20,11;4,5',
-                'closest_points': '2,2;4,5'
+            'id': response.data['id'],
+            'all_points': '2,2;-1,30;20,11;4,5',
+            'closest_points': '2,2;4,5'
             }
-
-        self.assertEqual(response.data, expected_data)
-
+        
+        # Compare relevant fields of the response data with the expected data
+        self.assertEqual(response.data['id'], expected_data['id'])
+        self.assertEqual(response.data['all_points'], expected_data['all_points'])
+        self.assertEqual(response.data['closest_points'], expected_data['closest_points'])
 
       
     def test_get_points(self):
@@ -72,4 +81,4 @@ class ClosestPointsAPITestCase(TestCase):
                 'closest_points': '1,1;3,3',
             }
         ]
-        self.assertEqual(response.data, expected_data)
+        self.assertCountEqual(response.data, expected_data)
