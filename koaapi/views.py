@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from .models import Point
 from .serializers import PointSerializer
 from django.contrib.auth import authenticate, login
