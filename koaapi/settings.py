@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-d+kpvsa8+v9dd%101k%#7koqlc(nr22ygvd)(14!)hxrfd^l2n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost', 'http://127.0.0.1:5500']
+ALLOWED_HOSTS = ['http://3.89.236.208', '3.89.236.208','127.0.0.1','localhost', 'http://127.0.0.1:5500']
 
 
 # Application definition
@@ -95,6 +95,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'koaapi.wsgi.application'
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5500',
+    'http://3.89.236.208',
     
 ]
 # Database
@@ -105,7 +106,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'koa',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'UrNKEeAnJtsM5M8FZTTk',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

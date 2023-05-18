@@ -81,5 +81,5 @@ Start the server
 
 **Client:** HTML, Javascript, Bootstrap CSS
 
-**API Server:** Python, Django
+**API Server:** Python, Django, MySQL
 
