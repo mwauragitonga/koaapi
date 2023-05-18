@@ -128,3 +128,8 @@ You can test the API in 2 different ways
   ```
 Use a tool like cURL, Postman, or any HTTP client library to send requests to the API endpoints
   If you are using Postman, import the Koa.postman_collection.json file to get started
+
+
+Developed by,
+
+Gitonga Mwaura - 2023
